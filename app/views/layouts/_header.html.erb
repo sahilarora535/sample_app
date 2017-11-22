@@ -1,10 +1,26 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-  <%= link_to "sample app", root_path, id: "logo" %>
+  <%= link_to 'sample app', root_path, id: 'logo' %>
   <div class="navbar-collapse justify-content-end">
     <ul class="navbar-nav">
-      <li class="nav-item active"><%= link_to "Home", root_path, class: "nav-link" %></li>
-      <li class="nav-item"><%= link_to "Help", help_path, class: "nav-link" %></li>
-      <li class="nav-item"><%= link_to "Log in", '#', class: "nav-link" %></li>
+      <li class="nav-item active"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
+      <li class="nav-item"><%= link_to 'Help', help_path, class: 'nav-link' %></li>
+      <% if logged_in? %>
+          <li><%= link_to 'Users', '#', class: 'nav-link' %></li>
+          <li class="dropdown nav-item">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'Profile', current_user, class: 'dropdown-item' %>
+              <%= link_to 'Settings', '#', class: 'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to 'Log out', logout_path, method: :delete, class: 'dropdown-item' %>
+            </div>
+          </li>
+
+      <% else %>
+          <li><%= link_to 'Log in', login_path, class: 'nav-link' %></li>
+      <% end %>
     </ul>
   </div>
 </nav>
